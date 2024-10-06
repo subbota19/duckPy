@@ -5,9 +5,10 @@ DB_NAME = "university"
 select_all_students = """
 SELECT * FROM students
 """
+
 try:
     duck_wrapper = DuckWrapper(db_name=DB_NAME)
-    students = duck_wrapper.execute(query=select_all_students)
+    students = duck_wrapper.execute_fetchall(query=select_all_students)
     for student in students:
         print(student)
 except Exception as e:

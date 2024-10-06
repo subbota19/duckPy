@@ -11,10 +11,15 @@ class DuckWrapper:
     def __init__(self, db_name: str):
         self.con = connect(database=f"{DATA_DIR}/{db_name}", read_only=False)
 
-    def execute(self, query: str) -> List[Any]:
+    def execute_fetchall(self, query: str) -> List[Any]:
         try:
-            result = self.con.execute(query).fetchall()
-            return result
+            return self.con.execute(query).fetchall()
+        except Exception as e:
+            print(f"Failed to execute DuckDB query: {e}")
+
+    def execute_commit(self, query: str, args: tuple = ()) -> None:
+        try:
+            self.con.execute(query, args).commit()
         except Exception as e:
             print(f"Failed to execute DuckDB query: {e}")
 
