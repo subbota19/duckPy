@@ -8,8 +8,8 @@ DATA_DIR = path_join(PARENT_DIR, 'db_storage')
 
 
 class DuckWrapper:
-    def __init__(self, db_name: str):
-        self.con = connect(database=f"{DATA_DIR}/{db_name}", read_only=False)
+    def __init__(self, db_name: str, path=DATA_DIR):
+        self.con = connect(database=f"{path}/{db_name}", read_only=False)
 
     def execute_fetchall(self, query: str) -> List[Any]:
         try:
